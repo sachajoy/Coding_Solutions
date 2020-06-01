@@ -32,7 +32,7 @@ bool can_placed(int **a, int row, int col, int n)
     return true;
 }
 
-void print_solution(int **a, int row, int n)
+bool print_solution(int **a, int row, int n)
 {
     // cout << "row-" << row << endl;
     if (row == n)
@@ -41,11 +41,15 @@ void print_solution(int **a, int row, int n)
         {
             for (int j = 0; j < n; j++)
             {
-                cout << a[i][j] << " ";
+				if(a[i][j] == 1)
+					cout << "* ";
+                else
+					cout << ". ";
             }
+			cout << endl;
         }
         cout << endl;
-        return;
+        return true;
     }
 
     for (int j = 0; j < n; j++)
@@ -55,8 +59,10 @@ void print_solution(int **a, int row, int n)
         if (temp)
         {
             a[row][j] = 1;
-            print_solution(a, row + 1, n);
+            bool flag = print_solution(a, row + 1, n);
             a[row][j] = 0;
+            if(flag)
+                return flag;
         }
     }
 }
@@ -72,7 +78,7 @@ void placeNQueens(int n)
             a[i][j] = 0;
         }
     }
-    print_solution(a, 0, n);
+   bool flag =  print_solution(a, 0, n);
 }
 int main()
 {
