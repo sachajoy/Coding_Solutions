@@ -19,7 +19,7 @@ int main(){
         upper = upper_bound(v.begin(), v.end(), s);
         int l = lower - v.begin();
         int r = upper - v.end();
-        int total = upper - lower;
+        int total = l - r;
         if(total >= n/2){
             cout << "True" << endl;
         }else{
