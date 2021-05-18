@@ -1,27 +1,54 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
-int* get_lps(string s){
-    int len = s.length();
-    int* lps = new int[len];
-    int i=1, j=0;
+int *getlps(string pattern)
+{
+    int len = pattern.size();
+    int j = 0, i = 1;
+    int *lps = new int[len];
     lps[0] = 0;
-    while(i<len){
-        if(s[i] == s[j]){
+    while (i < len)
+    {
+        if (pattern[j] == pattern[j])
+        {
             lps[i] = j+1;
+            i++;
+            j++;
+        }
+        else
+        {
+            if (j != 0)
+            {
+                j = lps[j - 1];
+            }
+            else
+            {
+                lps[i] = 0;
+                i++;
+            }
+        }
+    }
+    return lps;
+}
+bool kmp(string text, string pattern)
+{
+    int n = text.size();
+    int m = pattern.size();
+    int* lps = getlps(pattern);
+    int j=0, i=0;
+    while(i < n && j < m){
+        if(text[i] == pattern[j]){
             i++;
             j++;
         }else{
             if(j != 0){
                 j = lps[j-1];
             }else{
-                lps[i] = 0;
                 i++;
             }
         }
     }
 }
-
-int main(){
-
+int main()
+{
 }
